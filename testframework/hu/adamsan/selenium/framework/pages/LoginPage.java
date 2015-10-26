@@ -1,5 +1,6 @@
 package hu.adamsan.selenium.framework.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import hu.adamsan.selenium.framework.selenium.Driver;
@@ -11,9 +12,10 @@ public class LoginPage {
     public static void goTo() {
         Driver.INSTANCE.navigate().to(LOGIN_PAGE);
         WebDriverWait wait = new WebDriverWait(Driver.INSTANCE, 5);
-        wait.until(driver -> {
+        com.google.common.base.Predicate<WebDriver> p = driver -> {
             return driver.switchTo().activeElement().getAttribute("id").equals("user_login");
-        });
+        };
+        wait.until(p);
 
     }
 
